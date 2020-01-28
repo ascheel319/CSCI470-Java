@@ -1,0 +1,18 @@
+/********************************************************************
+Class:     CSCI 470-1
+Program:   Assignment 1
+Author:    Your Name
+Z-number:  z1234567
+Date Due:  mm/dd/yy
+
+Purpose:   A short indication of what the program does.
+
+Execution: Command to execute your program
+           (should match directions on assignment sheet)
+
+           java hw1.java nnn
+           If parm is omitted, 1000 is used.
+
+Notes:     (optional) any special notes to your T.A. or other readers
+
+*********************************************************************/
