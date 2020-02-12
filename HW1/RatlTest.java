@@ -9,11 +9,11 @@ public class RatlTest
       Ratl aa = new Ratl(3, 5);
       Boolean x;
       System.out.printf("%n");
-
+/*
       System.out.printf("fields of a:  %s%n", a.debugPrint());
       System.out.printf("fields of b:  %s%n", a.debugPrint());
       System.out.printf("fields of st: %s%n%n", a.debugPrint());
-
+*/
       x = (a == a);
       System.out.printf("%-32s%b%n", "3/5 == the same 3/5", x);
 
@@ -29,7 +29,7 @@ public class RatlTest
 
       // static test fns
 
-      System.out.printf("static:%n");
+/*      System.out.printf("static:%n");
       x = Ratl.ident(a, a);
       System.out.printf("%-32s%b%n", "3/5 is ident to the same 3/5", x);
 
@@ -68,12 +68,12 @@ public class RatlTest
 
       x = a.equiv(st);
       System.out.printf("%-32s%b%n%n", "3/5 is equiv to 6/10", x);
-
+*/
       // add
 
       Ratl c;
-      c = Ratl.add(a, b);
-      System.out.printf("static: %s + %s = %s%n", a, b, c);
+//      c = Ratl.add(a, b);
+//      System.out.printf("static: %s + %s = %s%n", a, b, c);
 
       Ratl d = new Ratl(a);
       d.add(b);
@@ -83,9 +83,9 @@ public class RatlTest
 
       a = new Ratl(3, 6);
       b = new Ratl(14, 14);
-      c = Ratl.add(a, b);
+//      c = Ratl.add(a, b);
 
-      System.out.printf("static: %s + %s = %s%n", a, b, c);
+//      System.out.printf("static: %s + %s = %s%n", a, b, c);
 
       d = new Ratl(a);
       d.add(b);
@@ -93,14 +93,14 @@ public class RatlTest
 
       // subtract
 
-      c = Ratl.sub(new Ratl(3, 5), new Ratl(7, 11));
-      System.out.printf("static: 3/5 - 7/11 = %s%n", c);
+//      c = Ratl.sub(new Ratl(3, 5), new Ratl(7, 11));
+//      System.out.printf("static: 3/5 - 7/11 = %s%n", c);
 
       c = new Ratl(3, 5);
       c.sub(new Ratl(7, 11));
       System.out.printf("member: 3/5 - 7/11 = %s%n%n", c);
 
-      // multiply
+/*      // multiply
 
       c = Ratl.mult(new Ratl(3, 6), new Ratl(7, 11));
       System.out.printf("static: 3/6 * 7/11 = %s%n", c);
@@ -115,7 +115,7 @@ public class RatlTest
 
       c = Ratl.div(new Ratl(14, 11), new Ratl(7, 11));
       System.out.printf("static: 14/11 / 7/11 = %s%n", c);
-
+*/
 
       System.out.printf("%n");
       testGCD(6, 10);

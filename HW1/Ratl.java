@@ -75,7 +75,9 @@ public class Ratl
 	public void reduce()
 	{
 		//maybe?
-		gcd(valueNum, valueDenom);
+		int greatestCommonDivisior = gcd(valueNum, valueDenom);
+		valueNum = valueNum / greatestCommonDivisior;
+		valueDenom = valueDenom / greatestCommonDivisior;
 	}
 
 	// static gcd
@@ -98,6 +100,7 @@ public class Ratl
 	{
 		//not sure if this will work or not
 		a.valueNum = a.valueNum * -1;
+		return a;
 	}
 
 	// static invert
@@ -109,30 +112,117 @@ public class Ratl
 		temp = a.valueNum;
 		a.valueNum = a.valueDenom;
 		a.valueDenom = temp;
+		return a;
 	}
 
 	// add
 	// adds b to the Ratl it is called with
+	static int[] gcm(Ratl b)
+	{
+		int[] arrOne = new int[20];
+                int[] arrTwo = new int[20];
+		int[] ans = new int[2];
+
+                for(int i = 0; i <= arrOne.length - 1; i++)
+                {
+                        arrOne[i] = valueDenom * i;
+                }
+                for(int i = 0; i <= arrTwo.length - 1; i++)
+                {
+                        arrTwo[i] = b.valueDenom * i;
+                }
+
+                //finding a common multiple
+                int aMultiple = 100;//large number so that it at least goes once
+                int bMultiple = 100;
+                for(int i = 0; i <= arrOne.length - 1; i++)
+                {
+                        for(int j = 0; i <= arrTwo.length - 1; j++)
+                        {
+				int x = arrOne[i];
+				int y = arrTwo[j];
+
+                                if(x == y && i < aMultiple && j < bMultiple)
+                                {
+                                        ans[0] = i;//a
+                                        ans[1] = j;//b
+                                }
+                        }
+                }
+		return ans;
+	}
+
 	public void add(Ratl b)
 	{
-		for(int i = 1; i < 100; i++)
+/*		//for the bottom number to be the same
+		int[] arrOne = new int[valueDenom];
+		int[] arrTwo = new int[b.valueDenom];
+
+		for(int i = 0; i < arrOne.length; i++)
 		{
-			if(valueNum * i == b.valueNum * )
+			arrOne[i] = valueDenom * i;
 		}
-		//maybe?
+		for(int i = 0; i < arrTwo.length; i++)
+		{
+			arrTwo[i] = b.valueDenom * i;
+		}
+
+		//finding a common multiple
+		int aMultiple = 100;//large number so that it at least goes through 1 time
+		int bMultiple = 100;
+		for(int i = 0; i < arrOne.length; i++)
+		{
+			for(int j = 0; i < arrTwo.length; j++)
+			{
+				if(arrOne[i] == arrTwo[j] && i < aMultiple && j < bMultiple)
+				{
+					aMultiple = i;
+					bMultiple = j;
+				}
+			}
+		}
+*/
+		//a = 0
+		//b = 1
+		int[] multiples = new int[2];
+		multiples = gcm(b);
+
+		//getting them to the same base
+		valueNum = valueNum * multiples[0];
+		valueDenom = valueDenom * multiples[0];
+		b.valueNum = b.valueNum * multiples[1];
+		b.valueDenom = b.valueDenom * multiples[1];
+
+		//actually add them
 		valueNum = valueNum + b.valueNum;
-		//valueDenom = valueDenom + b.valueDenom;
+
+		//call reduce
+		reduce();
+
 	}
 
 	// sub
 	// implemented with add and negate
 	public void sub(Ratl b)
 	{
-		
+		int[] multiples = new int[2];
+                multiples = gcm(b);
+
+                //getting them to the same base
+                valueNum = valueNum * multiples[0];
+                valueDenom = valueDenom * multiples[0];
+                b.valueNum = b.valueNum * multiples[1];
+                b.valueDenom = b.valueDenom * multiples[1];
+
+                //actually subtract them
+                valueNum = valueNum - b.valueNum;
+
+                //call reduce
+                reduce();
 	}
 
 	// mult
-	public void mult(Ratl b)
+/*	public void mult(Ratl b)
 	{
 		
 	}
@@ -185,7 +275,7 @@ public class Ratl
 	{
 		
 	}
-
+*/
 	// static equiv
 	public static boolean equiv(Ratl a, Ratl b)
 	{
@@ -203,10 +293,10 @@ public class Ratl
 	// builds a string from the fields of a Ratl object as follows:
 	// num value 3 denom value 5 num visible 6 denom visible 10
 	// you might find Integer.toString() useful
-	public String debugPrint()
+/*	public String debugPrint()
 	{
 		
 	}
-
+*/
 
 }
