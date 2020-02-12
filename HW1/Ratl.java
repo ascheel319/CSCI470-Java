@@ -74,13 +74,22 @@ public class Ratl
 	// uses the gcd function
 	public void reduce()
 	{
-
+		//maybe?
+		gcd(valueNum, valueDenom);
 	}
 
 	// static gcd
 	public static int gcd(int a, int b)
 	{
-
+		int gcd = 0;
+		for(int i = 1; i <= a; i++)
+		{
+			if(Math.abs(a) % i == 0 && Math.abs(b) % i == 0)
+			{
+				gcd = i;
+			}
+		}
+		return gcd;
 	}
 
 	// static negate
@@ -106,7 +115,13 @@ public class Ratl
 	// adds b to the Ratl it is called with
 	public void add(Ratl b)
 	{
-		
+		for(int i = 1; i < 100; i++)
+		{
+			if(valueNum * i == b.valueNum * )
+		}
+		//maybe?
+		valueNum = valueNum + b.valueNum;
+		//valueDenom = valueDenom + b.valueDenom;
 	}
 
 	// sub
