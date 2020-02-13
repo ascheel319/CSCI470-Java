@@ -9,11 +9,11 @@ public class RatlTest
       Ratl aa = new Ratl(3, 5);
       Boolean x;
       System.out.printf("%n");
-/*
+
       System.out.printf("fields of a:  %s%n", a.debugPrint());
       System.out.printf("fields of b:  %s%n", a.debugPrint());
       System.out.printf("fields of st: %s%n%n", a.debugPrint());
-*/
+
       x = (a == a);
       System.out.printf("%-32s%b%n", "3/5 == the same 3/5", x);
 
