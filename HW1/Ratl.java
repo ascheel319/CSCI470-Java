@@ -101,7 +101,10 @@ public class Ratl
 		int temp;
 		temp = a.valueNum;
 		a.valueNum = a.valueDenom;
+		a.visibleNum = a.valueNum;
+
 		a.valueDenom = temp;
+		a.visibleDenom = temp;
 		return a;
 	}
 
@@ -149,20 +152,25 @@ public class Ratl
 
 	public void add(Ratl b)
 	{
+		valueNum = visibleNum;
+		valueDenom = visibleDenom;
+
 		//a = 0
 		//b = 1
 		int[] multiples = new int[2];
 		multiples = gcm(b);
 
 		//getting them to the same base
-		valueNum = valueNum * multiples[0];
-		valueDenom = valueDenom * multiples[0];
-		b.valueNum = b.valueNum * multiples[1];
-		b.valueDenom = b.valueDenom * multiples[1];
+		int tempNum = valueNum * multiples[0];
+		int tempDenom = valueDenom * multiples[0];
+		int bTempNum = /*b.valueNum = */b.valueNum * multiples[1];
+		int bTempDenom = /*b.valueDenom = */b.valueDenom * multiples[1];
 
 		//actually add them
-		setNum(valueNum + b.valueNum);
-		setDenom(valueDenom);
+		valueNum = tempNum + bTempNum;
+//		setNum(valueNum + b.valueNum);
+		valueDenom = tempDenom;
+//		setDenom(valueDenom);
 
 		//call reduce
 		reduce();
@@ -172,92 +180,97 @@ public class Ratl
 	// implemented with add and negate
 	public void sub(Ratl b)
 	{
-/*		int[] multiples = new int[2];
-		multiples = gcm(b);
-
-		//getting them to the same base
-		valueNum = valueNum * multiples[0];
-		valueDenom = valueDenom * multiples[0];
-		b.valueNum = b.valueNum * multiples[1];
-		b.valueDenom = b.valueDenom * multiples[1];
-
-		//actually subtract them
-		setNum(valueNum - b.valueNum);
-		setDenom(valueDenom);
-
-		//call reduce
-		reduce();
-*/
-		b.setNum(negate(b.getNum()));
+		//change the second number to a negative
+		negate(b);
+		//"add" the numbers
 		add(b);
 	}
 
 	// mult
-/*	public void mult(Ratl b)
+	public void mult(Ratl b)
 	{
-		
+		//multiply tops
+		setNum(valueNum * b.valueNum);
+
+		//multiply bottoms
+		setDenom(valueDenom * b.valueDenom);
+
+		//simplify
+		reduce();
 	}
 
 	// div
 	// implemented with mult and inverse
 	public void div(Ratl b)
 	{
-		
+		//flip num
+		invert(b);
+		//call multiply
+		mult(b);
 	}
 
 	// static add
 	public static Ratl add(Ratl a, Ratl b)
 	{
-		
+		//call add
+		a.add(b);
+		return a;
 	}
 
 	// static sub
 	public static Ratl sub(Ratl a, Ratl b)
 	{
-		
+		a.sub(b);
+		return a;
 	}
 
 	// static mult
 	public static Ratl mult(Ratl a, Ratl b)
 	{
-		
+		a.mult(b);
+		return a;
 	}
 
 	// static div
 	public static Ratl div(Ratl a, Ratl b)
 	{
-		
+		a.div(b);
+		return a;
 	}
 
 	// member ident
+	//returns true if the numbers are exact
 	public boolean ident(Ratl a)
 	{
-		
+		if(valueNum == a.valueNum && valueDenom == a.valueDenom)
+                {
+                        return true;
+                }
+                else
+                {
+                        return false;
+                }
 	}
 
 	// member equiv
+	//return true if the numbers can be reduced to the same
 	public boolean equiv(Ratl a)
 	{
-		
+		return true;
 	}
 
 	// static ident
 	public static boolean ident(Ratl a, Ratl b)
 	{
-		
+		boolean temp = a.ident(b);
+		return temp;
 	}
-*/
+
 	// static equiv
 	public static boolean equiv(Ratl a, Ratl b)
 	{
-		if(a.valueNum == b.valueNum && a.valueDenom == b.valueDenom)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		boolean temp = a.equiv(b);
+		return temp;
 	}
 
 	// debugPrint
@@ -266,7 +279,7 @@ public class Ratl
 	// you might find Integer.toString() useful
 	public String debugPrint()
 	{
-		String output = "num value " + valueNum + " denom value " + valueDenom + " num visible " + visibleNum + " denom visible " + visibleDenom;
+		String output = "num value " + valueNum + "  denom value " + valueDenom + "  num visible " + visibleNum + "  denom visible " + visibleDenom;
 		return output;
 	}
 
