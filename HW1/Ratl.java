@@ -1,5 +1,4 @@
-public class Ratl
-{
+public class Ratl {
 	private int valueNum;
 	private int valueDenom;
 	private int visibleNum;
@@ -108,8 +107,8 @@ public class Ratl
 		return a;
 	}
 
-	// add
-	// adds b to the Ratl it is called with
+	//public gcm
+	//used to get what the numbers need to be multiplied by to get the based to be the same
 	public int[] gcm(Ratl b)
 	{
 		int[] arrOne = new int[50];
@@ -137,19 +136,17 @@ public class Ratl
                         {
                                if(arrOne[i] == arrTwo[j] && (changed == false))
                                 {
-//					System.out.println(arrOne[i] + "==" + arrTwo[j]);
                                         ans[0] = i;//a
                                         ans[1] = j;//b
 					changed = true;
                                 }
                         }
                 }
-//			for(int i = 0; i < 2; i++)
-//				System.out.print("ans[" + i + "]: " + ans[i] + "\n");
-//System.out.print("");
 		return ans;
 	}
 
+	// add
+	// adds b to the Ratl it is called with
 	public void add(Ratl b)
 	{
 		valueNum = visibleNum;
@@ -161,16 +158,14 @@ public class Ratl
 		multiples = gcm(b);
 
 		//getting them to the same base
-		int tempNum = valueNum * multiples[0];
-		int tempDenom = valueDenom * multiples[0];
-		int bTempNum = /*b.valueNum = */b.valueNum * multiples[1];
-		int bTempDenom = /*b.valueDenom = */b.valueDenom * multiples[1];
+		valueNum = valueNum * multiples[0];
+		valueDenom = valueDenom * multiples[0];
+		b.valueNum = b.valueNum * multiples[1];
+		b.valueDenom = b.valueDenom * multiples[1];
 
 		//actually add them
-		valueNum = tempNum + bTempNum;
-//		setNum(valueNum + b.valueNum);
-		valueDenom = tempDenom;
-//		setDenom(valueDenom);
+		valueNum = valueNum + b.valueNum;
+		valueDenom = valueDenom;
 
 		//call reduce
 		reduce();
@@ -212,9 +207,13 @@ public class Ratl
 	// static add
 	public static Ratl add(Ratl a, Ratl b)
 	{
+		//saves the values so they don't get wiped out...this made it work
+		Ratl temp = new Ratl(a);
+
 		//call add
-		a.add(b);
-		return a;
+		temp.add(b);
+
+		return temp;
 	}
 
 	// static sub
@@ -242,7 +241,7 @@ public class Ratl
 	//returns true if the numbers are exact
 	public boolean ident(Ratl a)
 	{
-		if(valueNum == a.valueNum && valueDenom == a.valueDenom)
+		if(visibleNum == a.visibleNum && visibleDenom == a.visibleDenom)
                 {
                         return true;
                 }
@@ -256,7 +255,37 @@ public class Ratl
 	//return true if the numbers can be reduced to the same
 	public boolean equiv(Ratl a)
 	{
-		return true;
+		//check for same number
+		if(valueNum == a.valueNum && valueDenom == a.valueDenom)
+		{
+			return true;
+		}
+		else
+		{
+			//reducing
+			int greatestCommonDivisior = gcd(valueNum, valueDenom);
+			valueNum = valueNum / greatestCommonDivisior;
+			valueDenom = valueDenom / greatestCommonDivisior;
+
+			greatestCommonDivisior = gcd(a.valueNum, a.valueDenom);
+			a.valueNum = a.valueNum / greatestCommonDivisior;
+			a.valueDenom = a.valueDenom / greatestCommonDivisior;
+
+			if(valueNum == a.valueNum && valueDenom == a.valueDenom)
+			{
+				//resetting the numbers before the return
+				valueNum = visibleNum;
+				valueDenom = visibleDenom;
+				a.valueNum = a.visibleNum;
+				a.valueDenom = a.visibleDenom;
+
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 
 	// static ident
@@ -282,6 +311,4 @@ public class Ratl
 		String output = "num value " + valueNum + "  denom value " + valueDenom + "  num visible " + visibleNum + "  denom visible " + visibleDenom;
 		return output;
 	}
-
-
 }
