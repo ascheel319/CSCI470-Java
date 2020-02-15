@@ -1,4 +1,33 @@
-public class Ratl {
+/********************************************************************
+Class:     CSCI 470-1
+Program:   Assignment 1
+Author:    Andrew Scheel
+Z-number:  z1790270
+Date Due:  2/18/2020
+
+Purpose:   In this assignment you will implement a class Ratl that represents a
+	rational number as four integers, a numerator and a denominator in canonical
+	form, and a numerator and denominator in the form they were originally input.
+
+Execution: The program is called in a tester program so there is no command to execute for it.
+
+Notes:     I have an extra function that I made cause I though I needed it.
+	I'm bad at fractions so it at least helped.
+
+*********************************************************************/
+
+
+/****************************************************************
+   Ratl
+
+   Author:    Andrew Scheel
+   Z-number:  z1790270
+
+   Description: The class emulates how you do fractions on pen and paper
+
+****************************************************************/
+public class Ratl
+{
 	private int valueNum;
 	private int valueDenom;
 	private int visibleNum;
@@ -32,7 +61,7 @@ public class Ratl {
 		valueDenom = a.valueDenom;
 
 		visibleNum = a.visibleNum;
-                visibleDenom = a.visibleDenom;
+		visibleDenom = a.visibleDenom;
 	}
 	// getters
 	public int getNum()
@@ -111,37 +140,40 @@ public class Ratl {
 	//used to get what the numbers need to be multiplied by to get the based to be the same
 	public int[] gcm(Ratl b)
 	{
+		//pretty sure this function can be done just ind GCD but I felt like overcomplicating it but in my head it made more sense
 		int[] arrOne = new int[50];
-                int[] arrTwo = new int[50];
+		int[] arrTwo = new int[50];
 		int[] ans = new int[2];
 
-                for(int i = 0; i < arrOne.length - 1; i++)
-                {
-                        arrOne[i] = valueDenom * i;
-                }
+		//finding the multiples of the numbers
+		for(int i = 0; i < arrOne.length - 1; i++)
+		{
+			arrOne[i] = valueDenom * i;
+		}
 
-                for(int i = 0; i < arrTwo.length - 1; i++)
-                {
-                        arrTwo[i] = b.valueDenom * i;
-                }
+		for(int i = 0; i < arrTwo.length - 1; i++)
+		{
+			arrTwo[i] = b.valueDenom * i;
+		}
 
-                //finding a common multiple
-                int aMultiple = 100;//large number so that it at least goes once
-                int bMultiple = 100;
+		//finding a common multiple
+		int aMultiple = 100;//large number so that it at least goes once
+		int bMultiple = 100;
 		boolean changed = false;
 
-                for(int i = 1; i <= arrOne.length - 1; i++)
-                {
-                        for(int j = 1; j <= arrTwo.length - 1; j++)
-                        {
-                               if(arrOne[i] == arrTwo[j] && (changed == false))
-                                {
-                                        ans[0] = i;//a
-                                        ans[1] = j;//b
+		//checks to see if the multiples match at all
+		for(int i = 1; i <= arrOne.length - 1; i++)
+		{
+			for(int j = 1; j <= arrTwo.length - 1; j++)
+			{
+				if(arrOne[i] == arrTwo[j] && (changed == false))
+				{
+					ans[0] = i;//a
+					ans[1] = j;//b
 					changed = true;
-                                }
-                        }
-                }
+				}
+			}
+		}
 		return ans;
 	}
 
@@ -149,6 +181,7 @@ public class Ratl {
 	// adds b to the Ratl it is called with
 	public void add(Ratl b)
 	{
+		//make sure value and visible are the same
 		valueNum = visibleNum;
 		valueDenom = visibleDenom;
 
@@ -219,6 +252,7 @@ public class Ratl {
 	// static sub
 	public static Ratl sub(Ratl a, Ratl b)
 	{
+		//calls member sub
 		a.sub(b);
 		return a;
 	}
@@ -226,6 +260,7 @@ public class Ratl {
 	// static mult
 	public static Ratl mult(Ratl a, Ratl b)
 	{
+		//calls member mult
 		a.mult(b);
 		return a;
 	}
@@ -233,6 +268,7 @@ public class Ratl {
 	// static div
 	public static Ratl div(Ratl a, Ratl b)
 	{
+		//calls member div
 		a.div(b);
 		return a;
 	}
@@ -241,14 +277,15 @@ public class Ratl {
 	//returns true if the numbers are exact
 	public boolean ident(Ratl a)
 	{
+		//checks to see if the number are the exact same
 		if(visibleNum == a.visibleNum && visibleDenom == a.visibleDenom)
-                {
-                        return true;
-                }
-                else
-                {
-                        return false;
-                }
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	// member equiv
@@ -262,7 +299,7 @@ public class Ratl {
 		}
 		else
 		{
-			//reducing
+			//reducing the numbers
 			int greatestCommonDivisior = gcd(valueNum, valueDenom);
 			valueNum = valueNum / greatestCommonDivisior;
 			valueDenom = valueDenom / greatestCommonDivisior;
@@ -271,6 +308,7 @@ public class Ratl {
 			a.valueNum = a.valueNum / greatestCommonDivisior;
 			a.valueDenom = a.valueDenom / greatestCommonDivisior;
 
+			//checking the numbers after reduction
 			if(valueNum == a.valueNum && valueDenom == a.valueDenom)
 			{
 				//resetting the numbers before the return
@@ -291,6 +329,7 @@ public class Ratl {
 	// static ident
 	public static boolean ident(Ratl a, Ratl b)
 	{
+		//calls member ident cause I wrote that first
 		boolean temp = a.ident(b);
 		return temp;
 	}
@@ -298,6 +337,7 @@ public class Ratl {
 	// static equiv
 	public static boolean equiv(Ratl a, Ratl b)
 	{
+		//calls member equiv cause I wrote that first
 		boolean temp = a.equiv(b);
 		return temp;
 	}
@@ -308,6 +348,7 @@ public class Ratl {
 	// you might find Integer.toString() useful
 	public String debugPrint()
 	{
+		//makes a string and then returns it
 		String output = "num value " + valueNum + "  denom value " + valueDenom + "  num visible " + visibleNum + "  denom visible " + visibleDenom;
 		return output;
 	}
