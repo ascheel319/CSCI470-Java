@@ -1,7 +1,7 @@
 
 fields of a:  num value 3  denom value 5  num visible 3  denom visible 5
-fields of b:  num value 3  denom value 5  num visible 3  denom visible 5
-fields of st: num value 3  denom value 5  num visible 3  denom visible 5
+fields of b:  num value 7  denom value 11  num visible 7  denom visible 11
+fields of st: num value 3  denom value 5  num visible 6  denom visible 10
 
 3/5 == the same 3/5             true
 3/5 == a different 3/5          false

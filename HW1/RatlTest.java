@@ -11,15 +11,15 @@ public class RatlTest
       System.out.printf("%n");
 
       System.out.printf("fields of a:  %s%n", a.debugPrint());
-      System.out.printf("fields of b:  %s%n", a.debugPrint());
-      System.out.printf("fields of st: %s%n%n", a.debugPrint());
-
+      System.out.printf("fields of b:  %s%n", b.debugPrint());
+      System.out.printf("fields of st: %s%n%n", st.debugPrint());      
+      
       x = (a == a);
       System.out.printf("%-32s%b%n", "3/5 == the same 3/5", x);
 
       x = (a == aa);
       System.out.printf("%-32s%b%n", "3/5 == a different 3/5", x);
-
+      
       x = a.equals(a);
       System.out.printf("%-32s%b%n", "3/5 .equals the same 3/5", x);
 
@@ -70,7 +70,7 @@ public class RatlTest
       System.out.printf("%-32s%b%n%n", "3/5 is equiv to 6/10", x);
 
       // add
-
+      
       Ratl c;
       c = Ratl.add(a, b);
       System.out.printf("static: %s + %s = %s%n", a, b, c);
@@ -80,19 +80,19 @@ public class RatlTest
       System.out.printf("member: %s + %s = %s%n%n", a, b, d);
 
       // add with reduction
-
+      
       a = new Ratl(3, 6);
       b = new Ratl(14, 14);
       c = Ratl.add(a, b);
 
       System.out.printf("static: %s + %s = %s%n", a, b, c);
-
+      
       d = new Ratl(a);
       d.add(b);
       System.out.printf("member: %s + %s = %s%n%n", a, b, d);
 
       // subtract
-
+      
       c = Ratl.sub(new Ratl(3, 5), new Ratl(7, 11));
       System.out.printf("static: 3/5 - 7/11 = %s%n", c);
 
@@ -101,7 +101,7 @@ public class RatlTest
       System.out.printf("member: 3/5 - 7/11 = %s%n%n", c);
 
       // multiply
-
+      
       c = Ratl.mult(new Ratl(3, 6), new Ratl(7, 11));
       System.out.printf("static: 3/6 * 7/11 = %s%n", c);
 
@@ -109,7 +109,7 @@ public class RatlTest
       System.out.printf("static: 7/11 * 3/6 = %s%n%n", c);
 
       // divide
-
+      
       c = Ratl.div(new Ratl(7, 11), new Ratl(7, 11));
       System.out.printf("static: 7/11 / 7/11 = %s%n", c);
 
