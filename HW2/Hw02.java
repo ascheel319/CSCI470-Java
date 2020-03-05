@@ -1,0 +1,7 @@
+
+
+public classs Hw02()
+{
+
+
+}
